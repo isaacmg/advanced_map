@@ -29,14 +29,12 @@ function initialize() {
     center: myLatlng,
    mapTypeId: google.maps.MapTypeId.HYBRID 
   }
-  //Creates the markers 
+  //Creates the markers (maybe if it works)
  function makeAMarkd ( coordinates, logo, map1)
- {
- var marker5 = new google.maps.Marker({
+ {    var marker5 = new google.maps.Marker({
  	  icon: logo , 
       position: coordinates,
-      map: map1,
-      
+      map: map1,  
   });
  
  }
@@ -45,7 +43,7 @@ function initialize() {
   var theBase = makeAMarkd(basinRapid, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map);
   var veazie = makeAMarkd(veazieRapid, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map);
   var greatWorkL = makeAMarkd(greatWorksLeft, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map);
-  var finish = makeAMarkd(finish, "http://maps.google.com/mapfiles/ms/icons/red-dot.png", map);
+  
   var marker = new google.maps.Marker({
   icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" , 
       position: start,
@@ -71,21 +69,27 @@ function initialize() {
       map: null,
       
   });
+  var finish2 = new google.maps.Marker({
+  	  icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" , 
+      position: finish,
+      map: map,
+      });
   
+  //Event Listeners 
    
    google.maps.event.addListener(marker, 'click', function() {
    
     map.setZoom(19);
     map.setCenter(marker.getPosition()); 
     startinfo.open(map, marker)
-    var myLoc = { 'lat': marker.getPosition().lat(), 'lon': marker.getPosition().lng() };
+    
      });
   
 google.maps.event.addListener(marker2, 'click', function() {
     map.setZoom(17);
-    var myLoc = { 'lat': marker2.getPosition().lat(), 'lon': marker2.getPosition().lng() };
+
     map.setCenter(marker2.getPosition()); 
-  
+  	finishnfo.open(map, marker2)
      
 });
 // Event Listener for zoom changes 
@@ -106,11 +110,17 @@ var zoom = map.getZoom();
 });
 //Info window content 
 var startInfo2 = ' <p> ' + 'This  is the starting line' + '</p>';
+var finishInfo2 = ' <p> ' + 'This  is the finish line' + '</p>';
 
 var startinfo = new google.maps.InfoWindow({
 content: startInfo2
     
 });
+var finishnfo = new google.maps.InfoWindow({
+content: finishInfo2
+    
+});
+
 
     
 }
