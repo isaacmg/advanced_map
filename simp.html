@@ -14,6 +14,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
 function initialize() {
+
   // Initialize longitude and latitudes 
   var myLatlng = new google.maps.LatLng(44.8792305, -68.65);
   var start = new google.maps.LatLng(44.938038, -68.645933);
@@ -38,11 +39,11 @@ function initialize() {
   });
  
  }
- 
+  var markerArray2 = new Array();
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   var theBase = makeAMarkd(basinRapid, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map);
   var veazie = makeAMarkd(veazieRapid, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map);
-  var greatWorkL = makeAMarkd(greatWorksLeft, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map);
+  markerArray2.push(makeAMarkd(greatWorksLeft, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map));
   
   var marker = new google.maps.Marker({
   icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" , 
@@ -92,6 +93,7 @@ google.maps.event.addListener(marker2, 'click', function() {
   	finishnfo.open(map, marker2)
      
 });
+
 // Event Listener for zoom changes 
 google.maps.event.addListener(map, 'zoom_changed', function() {
 var zoom = map.getZoom();
