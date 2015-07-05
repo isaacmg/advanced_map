@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Simple markers</title>
+    <title>Dynamic Canoe Nationals Map</title>
     <style>
       html, body, #map-canvas {
         height: 100%;
@@ -14,26 +14,38 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
 function initialize() {
+  // Initialize longitude and latitudes 
   var myLatlng = new google.maps.LatLng(44.8792305, -68.65);
   var start = new google.maps.LatLng(44.938038, -68.645933);
   var greatWorks = new google.maps.LatLng(44.920074, -68.632338);
   var greatWorksRight = new google.maps.LatLng(44.919951, -68.634031);
   var greatWorksCenter = new google.maps.LatLng(44.920325, -68.632908);
   var greatWorksLeft = new google.maps.LatLng(44.920649, -68.632124);
+  var basinRapid = new google.maps.LatLng(44.877434, -68.664455);
+  var veazieRapid = new google.maps.LatLng(44.832212, -68.700638);
+  var finish = new google.maps.LatLng(44.825316, -68.693468);
   var mapOptions = {
     zoom: 12,
-   
     center: myLatlng,
    mapTypeId: google.maps.MapTypeId.HYBRID 
   }
-  function updateMarkerPosition(latLng) {
-  document.getElementById('info').innerHTML = [
-    latLng.lat(),
-    latLng.lng()
-  ].join(', ');
-}
-  
+  //Creates the markers 
+ function makeAMarkd ( coordinates, logo, map1)
+ {
+ var marker5 = new google.maps.Marker({
+ 	  icon: logo , 
+      position: coordinates,
+      map: map1,
+      
+  });
+ 
+ }
+ 
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  var theBase = makeAMarkd(basinRapid, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map);
+  var veazie = makeAMarkd(veazieRapid, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map);
+  var greatWorkL = makeAMarkd(greatWorksLeft, "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" , map);
+  var finish = makeAMarkd(finish, "http://maps.google.com/mapfiles/ms/icons/red-dot.png", map);
   var marker = new google.maps.Marker({
   icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" , 
       position: start,
@@ -76,6 +88,7 @@ google.maps.event.addListener(marker2, 'click', function() {
   
      
 });
+// Event Listener for zoom changes 
 google.maps.event.addListener(map, 'zoom_changed', function() {
 var zoom = map.getZoom();
 		if(zoom > 15 )
@@ -91,7 +104,9 @@ var zoom = map.getZoom();
         gWorksc.setMap(null); 
        }
 });
+//Info window content 
 var startInfo2 = ' <p> ' + 'This  is the starting line' + '</p>';
+
 var startinfo = new google.maps.InfoWindow({
 content: startInfo2
     
